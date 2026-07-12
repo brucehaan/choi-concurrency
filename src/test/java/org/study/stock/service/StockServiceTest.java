@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class StockServiceTest {
     @Autowired
-    StockService stockService;
+    PessimisticLockStockService stockService;
     @Autowired
     StockRepository stockRepository;
 
@@ -61,6 +61,6 @@ class StockServiceTest {
 
         Stock stock = stockRepository.findById(1L).orElseThrow();
         // 예상 : 100 - (1 * 100) = 0
-        assertThat(stock.getQuantity()).isNotEqualTo(0);
+        assertThat(stock.getQuantity()).isEqualTo(0);
     }
 }
